@@ -1,2 +1,2 @@
-# SpONSOR_T
+# SpONSOR<sub>T</sub>
 SpONSOR for Televita
