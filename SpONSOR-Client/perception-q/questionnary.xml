@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<questionnary>
+    <name>
+        Valutazione delle percezioni Individuali
+    </name>
+    <max>10</max>
+    <questions>
+        <question>
+            <title>
+                Sezione I
+            </title>
+            <subtitle>
+                In che modo ritengo di poter contribuire ad un lavoro in gruppo.
+            </subtitle>
+            <answers>
+                <answer>
+                    <code>a</code>
+                    <text>Penso di poter capire rapidamente nuove opportunità operative e trarne vantaggio.</text>
+                </answer>
+                <answer>
+                    <code>b</code>
+                    <text>Sono in grado di lavorare bene con le persone più diverse.</text>
+                </answer>
+                <answer>
+                    <code>c</code>
+                    <text>Una delle mie caratteristiche principali è produrre idee nuove.</text>
+                </answer>
+                <answer>
+                    <code>d</code>
+                    <text>So far emergere i contributi degli altri se mi accorgo che essi abbiano qualcosa che può essere utile agli obiettivi del gruppo..</text>
+                </answer>
+                <answer>
+                    <code>e</code>
+                    <text>Ho la capacità di andare in profondità grazia alla mia efficienza personale.</text>
+                </answer>
+                <answer>
+                    <code>f</code>
+                    <text>Sono disposto ad essere impopolare pur dì raggiungere risultati in cui credo.</text>
+                </answer>
+                <answer>
+                    <code>g</code>
+                    <text>Ho una certa sensibilità a capire cosa è realisticamente giusto fare.</text>
+                </answer>
+                <answer>
+                    <code>h</code>
+                    <text>Sono in grado di offrire azioni alternative ragionevoli pur non combattendo le proposte degli altri.</text>
+                </answer>
+            </answers>
+        </question>
+        
+        <question>
+            <title>
+                Sezione II
+            </title>
+            <subtitle>
+                Se c'è poco tempo a disposizione per arrivare alla conclusione del lavoro di gruppo.può darsi che:
+            </subtitle>
+            <answers>
+                <answer>
+                    <code>a</code>
+                    <text>Non mi sento a mio agio finché la riunione non sia ben strutturata, controllata e ben condotta.</text>
+                </answer>
+                <answer>
+                    <code>b</code>
+                    <text>Sono incline ad essere anche troppo generoso verso quelli con un punto di vista valido, ai quali non sia dato spazio a sufficienza.</text>
+                </answer>
+                <answer>
+                    <code>c</code>
+                    <text>Ho la tendenza a parlare troppo quando nel gruppo emerga un'idea nuova.</text>
+                </answer>
+                <answer>
+                    <code>d</code>
+                    <text>La mia obiettiva chiarezza di idee rende difficile concordare presto e con entusiasmo con quelle degli altri.</text>
+                </answer>
+                <answer>
+                    <code>e</code>
+                    <text>Spesso appaio autoritario ed efficientista se c'è bisogno di raggiungere dei risultati in fretta.</text>
+                </answer>
+                <answer>
+                    <code>f</code>
+                    <text>Mi risulta difficile imporre la mia posizione al Gruppo, probabilmente per la mia preoccupazione che l'atmosfera generale si mantenga positiva.</text>
+                </answer>
+            </answers>
+        </question>
+        
+        <question>
+            <title>
+                Sezione III
+            </title>
+            <subtitle>
+                Quando sono coinvolto in un'azione operativa, in un progetto impegnativo:
+            </subtitle>
+            <answers>
+                <answer>
+                    <code>a</code>
+                    <text>Sono solito influenzare gli altri senza pressarli troppo.</text>
+                </answer>
+                <answer>
+                    <code>b</code>
+                    <text>La mia vigilanza personale previene errori ed omissioni causati da poca attenzione.</text>
+                </answer>
+                <answer>
+                    <code>c</code>
+                    <text>Sono solito far pressioni perché non si perda tempo e si mantenga una chiara visione degli obiettivi.</text>
+                </answer>
+                <answer>
+                    <code>d</code>
+                    <text>Si può contare su di me per contributi originali.</text>
+                </answer>
+                <answer>
+                    <code>e</code>
+                    <text>Sono sempre pronto a supportare un buon suggerimento per l'interesse comune.</text>
+                </answer>
+                <answer>
+                    <code>f</code>
+                    <text>Sono sempre alla ricerca di nuove idee per un'azione operativa in sviluppo.</text>
+                </answer>
+                <answer>
+                    <code>g</code>
+                    <text>Sono convinto che le mie capacità di giudizio possano aiutare ad arrivare alle decisioni più giuste.</text>
+                </answer>
+                <answer>
+                    <code>h</code>
+                    <text>Ci si può fidare di me per essere sicuri che tutto il lavoro essenziale sia stato organizzato.</text>
+                </answer>
+            </answers>  
+        </question> 
+        
+        <question>
+            <title>
+                Sezione IV
+            </title>
+            <subtitle>
+                Il mio approccio caratteristico in un lavoro di gruppo è:
+            </subtitle>
+            <answers>
+                <answer>
+                    <code>a</code>
+                    <text>Ho un certo interesse a conoscere meglio quelli con cui mi trovo ad agire.</text>
+                </answer>
+                <answer>
+                    <code>b</code>
+                    <text>Non ho difficoltà a confrontarmi con le opinioni degli altri o a rimanere nella "minoranza".</text>
+                </answer>
+                <answer>
+                    <code>c</code>
+                    <text>Sono sempre capace di trovare una motivazione estrema per rifiutare proposte inconcludenti.</text>
+                </answer>
+                <answer>
+                    <code>d</code>
+                    <text>Penso di essere in grado di mettere in pratica ciò che é stato deciso, in modo da renderlo operativo.</text>
+                </answer>
+                <answer>
+                    <code>e</code>
+                    <text>Ho la tendenza a scartare le cose ovvie per tendere ad ipotesi più originali ed impreviste.</text>
+                </answer>
+                <answer>
+                    <code>f</code>
+                    <text>Do un tocco di perfezionismo ad ogni lavoro di gruppo che mi vede coinvolto.</text>
+                </answer>
+                <answer>
+                    <code>g</code>
+                    <text>Tendo a mantenere rapporti e contatti con le singole persone anche al di fuori del comitato.</text>
+                </answer>
+                <answer>
+                    <code>h</code>
+                    <text>Anche se sono interessato alle posizioni di tutti, non esito a farmi un'idea ed a mantenerla ferma se occorre prendere una decisione.</text>
+                </answer>
+            </answers>
+        </question>
+        
+        <question>
+            <title>
+                Sezione V
+            </title>
+            <subtitle>
+                Ricevo soddisfazione dal lavoro che faccio in gruppo perché:
+            </subtitle>
+            <answers>
+                <answer>
+                    <code>a</code>
+                    <text>Mi piace analizzare le situazioni ché accadono e valutarne tutte le possibili evoluzioni.</text>
+                </answer>
+                <answer>
+                    <code>b</code>
+                    <text>Mi piace trovare le soluzioni pratiche dei problemi.</text>
+                </answer>
+                <answer>
+                    <code>c</code>
+                    <text>Mi piace accorgermi di stare ottenendo dei buoni rapporti interpersonali</text>
+                </answer>
+                <answer>
+                    <code>d</code>
+                    <text>Posso avere una influenza decisiva nelle decisioni da prendere.</text>
+                </answer>
+                <answer>
+                    <code>e</code>
+                    <text>So farmi stimare dalle persone che hanno qualcosa di nuovo da proporre.</text>
+                </answer>
+                <answer>
+                    <code>f</code>
+                    <text>Trovo gente che condivide con me le cose necessarie da fare.</text>
+                </answer>
+                <answer>
+                    <code>g</code>
+                    <text>Mi trovo a mio agio quando posso dedicare ad una cosa da fare tutto il mio impegno.</text>
+                </answer>
+                <answer>
+                    <code>h</code>
+                    <text>Mi piace stare in un campo che sollecita la mia creatività.</text>
+                </answer>
+            </answers>
+        </question>
+        
+        <question>
+            <title>
+                Sezione VI
+            </title>
+            <subtitle>
+                Se mi si affida un compito difficile con tempo limitato e persone, che non conosco con cui agire:
+            </subtitle>
+            <answers>
+                <answer>
+                    <code>a</code>
+                    <text>Il mio atteggiamento é starmene da una parte per capire come uscire dall'impasse prima di sviluppare una linea di azione.</text>
+                </answer>
+                <answer>
+                    <code>b</code>
+                    <text>Sono pronto a lavorare con la persona che dimostra l'approccio più positivo</text>
+                </answer>
+                <answer>
+                    <code>c</code>
+                    <text>Cerco di trovare il modo di ridurre le dimensioni del lavoro da fare, stabilendo dove i diversi componenti del gruppo possono dare un miglior contributo.</text>
+                </answer>
+                <answer>
+                    <code>d</code>
+                    <text>La mia normale componente di efficientismo, aiuta ad assicurare che non sì ricada al di sotto dei tempi ed obiettivi previsti.</text>
+                </answer>
+                <answer>
+                    <code>e</code>
+                    <text>Sono convinto di poter rimanere freddo e di poter mantenere le mie capacità di raggiungere il risultato</text>
+                </answer>
+                <answer>
+                    <code>f</code>
+                    <text>Manterrei comunque una serenità di giudizio a dispetto delle pressioni.</text>
+                </answer>
+                <answer>
+                    <code>g</code>
+                    <text>Sarei pronto a prenderne la guida se mi accorgessi che il gruppo non é in grado di fare progressi.</text>
+                </answer>
+                <answer>
+                    <code>h</code>
+                    <text>Comincerei ad esporre un'opinione per aprire la discussione, stimolando così nuove idee e facendo muovere qualcosa.</text>
+                </answer>
+            </answers>
+        </question>
+        
+        <question>
+            <title>
+                Sezione VII
+            </title>
+            <subtitle>
+                In riferimento ai problemi a cui posso essere soggetto lavorando con gli altri:
+            </subtitle>
+            <answers>
+                <answer>
+                    <code>a</code>
+                    <text>Sono solito dimostrare impazienza con quelli che fanno perdere tempo.</text>
+                </answer>
+                <answer>
+                    <code>b</code>
+                    <text>Gli altri possono criticarmi per essere troppo analitico ed insufficientemente intuitivo</text>
+                </answer>
+                <answer>
+                    <code>c</code>
+                    <text>Il mio desiderio che il lavoro sia fatto a puntino può bloccarne l'avanzamento.</text>
+                </answer>
+                <answer>
+                    <code>d</code>
+                    <text>Mi annoio abbastanza facilmente, e tendo comunque a fare comunella con quell'uno o due componenti del gruppo più attivi che mi stimolano maggiormente.</text>
+                </answer>
+                <answer>
+                    <code>e</code>
+                    <text>Mi é difficile cominciare ad agire prima che siano ben chiari gli obiettivi.</text>
+                </answer>
+                <answer>
+                    <code>f</code>
+                    <text>Ho talvolta difficoltà ad esprimere o a chiarire i punti complessi di cui mi accorgo.</text>
+                </answer>
+                <answer>
+                    <code>g</code>
+                    <text>Sono cosciente di chiedere dagli altri ciò che non sono in grado di dare io.</text>
+                </answer>
+                <answer>
+                    <code>h</code>
+                    <text>Ho esitazione ad esprimere le mie convinzioni se sento l'ambiente particolarmente ostile</text>
+                </answer>
+            </answers>
+        </question>  
+    </questions>
+</questionnary>

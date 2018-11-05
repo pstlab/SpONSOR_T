@@ -1,0 +1,253 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package it.cnr.istc.sponsor.tt.gui.solution;
+
+import it.cnr.istc.sponsor.tt.logic.model.ActivityTurn;
+import it.cnr.istc.sponsor.tt.logic.model.Person;
+import it.cnr.istc.sponsor.tt.logic.pdf.PDFManager;
+import it.cnr.istc.sponsor.tt.logic.pdf.generator.panel.TableImageGeneratorPanel;
+import java.awt.Point;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+
+/**
+ *
+ * @author Luca Coraci <luca.coraci@istc.cnr.it>
+ */
+public class PDFPreviewFrame extends javax.swing.JFrame {
+
+    private List<TableImageGeneratorPanel> panels = new ArrayList<>();
+    private Map<Integer, Point> mapMatix = new HashMap<>();
+    private Person person;
+
+    /**
+     * Creates new form PDFPreviewFrame
+     */
+    public PDFPreviewFrame() {
+        initComponents();
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+        this.jLabel_volontario.setText(person.toString());
+    }
+//
+//    public void clear(){
+//        page.clear();
+//        page = null;
+//        mapMatix.clear();
+//        this.jTabbedPane1.removeAll();
+//    }
+
+    /**
+     * i turni sono quelli di un mese
+     *
+     * @param page
+     */
+    public void addPage(List<ActivityTurn> page, int startMonth) {
+//        this.page = page;
+
+        GregorianCalendar gc = new GregorianCalendar();
+        if (!page.isEmpty()) {
+            gc.setTime(new Date(page.get(0).getStartTime()));
+        } else {
+            gc.setTime(new Date());
+        }
+        gc.set(Calendar.MONTH, startMonth);
+        gc.set(Calendar.DAY_OF_MONTH, 1);
+        int weekDay = gc.get(Calendar.DAY_OF_WEEK) == 1 ? 6 : gc.get(Calendar.DAY_OF_WEEK) - 2;
+        boolean startCount = false;
+        boolean endCount = false;
+        String[][] data = new String[6][7];
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 7; j++) {
+                data[i][j] = "NULL";
+            }
+        }
+        //forse startare ciclo cambio mese
+
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 7; j++) {
+                if (endCount) {
+                    data[i][j] = "NULL";
+                    gc.add(Calendar.DAY_OF_MONTH, 1);
+                    continue;
+                }
+                if (!startCount && j == weekDay) {
+                    data[i][j] = "" + gc.get(Calendar.DAY_OF_MONTH);
+                    mapMatix.put(gc.get(Calendar.DAY_OF_MONTH), new Point(i, j));
+                    startCount = true;
+                } else if (!startCount) {
+                    data[i][j] = "NULL";
+                } else {
+                    mapMatix.put(gc.get(Calendar.DAY_OF_MONTH), new Point(i, j));
+                    data[i][j] = "" + gc.get(Calendar.DAY_OF_MONTH);
+                }
+                if (startCount) {
+                    gc.add(Calendar.DAY_OF_MONTH, 1);
+                }
+                if (gc.get(Calendar.MONTH) != startMonth) {
+                    endCount = true;
+                }
+            }
+        }
+
+        for (ActivityTurn activityTurn : page) {
+            if (new Date(activityTurn.getStartTime()).getMonth() == startMonth) {
+                Point coord = mapMatix.get(new Date(activityTurn.getStartTime()).getDate());
+                if (coord == null) {
+                    System.err.println("NON E' CAZZ POSSIBLE CHE: " + activityTurn.getStartTime() + " sia null!!");
+                }
+
+//                #14:00 - 18:00;Telepresenza!18:30 - 20:00;Servizio Mensa
+                if (data[coord.x][coord.y].contains("#")) {
+                    data[coord.x][coord.y] += "!" + activityTurn.toPagePDF();
+                } else {
+                    data[coord.x][coord.y] += "#" + activityTurn.toPagePDF();
+                }
+
+            }
+        }
+
+        System.out.println("DATA !!!!");
+
+        for (int i = 0; i < 6; i++) {
+            for (int j = 0; j < 7; j++) {
+                System.out.print("" + data[i][j] + ".     ");
+            }
+            System.out.println("");
+        }
+        TableImageGeneratorPanel pagePanel = new TableImageGeneratorPanel();
+        pagePanel.setData(data);
+        gc.set(Calendar.MONTH, startMonth);
+        this.jTabbedPane1.addTab(gc.getDisplayName(gc.MONTH, Calendar.LONG_FORMAT, Locale.ITALY), pagePanel);
+        pagePanel.setMonthName(gc.getDisplayName(gc.MONTH, Calendar.LONG_FORMAT, Locale.ITALY));
+        this.panels.add(pagePanel);
+
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jButton1 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel_volontario = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jButton1.setText("Stampa");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setText("Volontario:");
+
+        jLabel_volontario.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel_volontario.setForeground(new java.awt.Color(0, 102, 255));
+        jLabel_volontario.setText("jLabel2");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPane1)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel_volontario, javax.swing.GroupLayout.DEFAULT_SIZE, 725, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel_volontario))
+                .addGap(16, 16, 16)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 501, Short.MAX_VALUE))
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+//        this.setPage(new ArrayList<>(), 0);
+//        this.setPage(new ArrayList<>(), 1);
+//        this.setPage(new ArrayList<>(), 2);
+        int i = 0;
+        for (TableImageGeneratorPanel panel : panels) {
+            this.jTabbedPane1.setSelectedIndex(i);
+            this.jTabbedPane1.repaint();
+            PDFManager.getInstance().printPDF(panel, person);
+            i++;
+        }
+
+
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(PDFPreviewFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(PDFPreviewFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(PDFPreviewFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(PDFPreviewFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new PDFPreviewFrame().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel_volontario;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    // End of variables declaration//GEN-END:variables
+}

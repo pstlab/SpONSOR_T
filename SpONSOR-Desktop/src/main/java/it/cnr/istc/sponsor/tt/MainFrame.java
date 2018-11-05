@@ -1,0 +1,517 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package it.cnr.istc.sponsor.tt;
+
+import it.cnr.istc.i18n.annotations.I18N;
+import it.cnr.istc.i18n.annotations.I18NUpdater;
+import it.cnr.istc.sponsor.tt.abstracts.RoundedBorderServerStatus;
+import it.cnr.istc.sponsor.tt.abstracts.SubMainPanel;
+import it.cnr.istc.sponsor.tt.gui.profiles.ProfilePanel;
+import it.cnr.istc.sponsor.tt.gui.activities.components.PeoplePerWeekPanel;
+import it.cnr.istc.sponsor.tt.gui.activities.table.ActivityTablePanel;
+import it.cnr.istc.sponsor.tt.gui.activities.table.OveralActivityTabbedPane;
+import it.cnr.istc.sponsor.tt.gui.people.PeoplePanel;
+import it.cnr.istc.sponsor.tt.gui.times.TimeIntervalContainer;
+import it.cnr.istc.sponsor.tt.gui.solution.SolutionPanel;
+import it.cnr.istc.sponsor.tt.logic.MQTTClient;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ButtonGroup;
+import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JToggleButton;
+import javax.swing.JToolBar;
+import javax.swing.LayoutStyle;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
+import javax.swing.WindowConstants;
+
+/**
+ *
+ * @author Luca Coraci <luca.coraci@istc.cnr.it> ISTC-CNR
+ */
+public class MainFrame extends javax.swing.JFrame {
+
+    private ProfilePanel profilePanel = new ProfilePanel();
+    private TimeIntervalContainer timePanel = new TimeIntervalContainer();
+    private ActivityTablePanel activityPanel = new ActivityTablePanel(null);
+    private PeoplePanel peoplePanel = new PeoplePanel();
+    private SolutionPanel solutionPanel = new SolutionPanel();
+    private OveralActivityTabbedPane oat = new OveralActivityTabbedPane();
+    private JComponent[] reservedButtons = null;
+    
+
+    @I18N(key = "frame.title")
+    private String title;
+
+    /**
+     * Creates new form TestTimeIntFrame
+     */
+    public MainFrame() {
+        initComponents();
+        this.setIconImage(new ImageIcon(getClass().getResource("/it/cnr/istc/sponsor/tt/gui/icons/sponsors.png")).getImage());
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        // this.setTitle("Trainer Gui - Sponsor v0.7");
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                System.out.println("Closed");
+                MQTTClient.getInstance().disconnect();
+                e.getWindow().dispose();
+            }
+        });
+        initFrame();
+        activityPanel.init();
+        String filename = "./digital-7.ttf";//this is for testing normally we would store the font file in our app (knows as an embedded resource), see this for help on that http://stackoverflow.com/questions/13796331/jar-embedded-resources-nullpointerexception/13797070#13797070
+
+        Font font = null;
+        try {
+            font = Font.createFont(Font.TRUETYPE_FONT, new File(filename));
+            font = font.deriveFont(Font.BOLD, 22);
+
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(font);
+            RoundedBorderServerStatus roundBorder = new RoundedBorderServerStatus(Color.BLACK, 20,jLabel_status);
+            this.jLabel_status.setBorder(roundBorder);
+            this.jLabel_status.setFont(font);
+            this.jLabel_status.setForeground(Color.RED);
+//            MQTTClient.getInstance().addMQTTListener(this);
+//            GuiEventManager.getInstance().addGuiEventListener(this);
+//            this.jLabel1.setText(""+TrainerManager.getInstance().getPeople().size());
+        } catch (FontFormatException ex) {
+            Logger.getLogger(PeoplePerWeekPanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(PeoplePerWeekPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    @I18NUpdater
+    public void initFrame() {
+        System.out.println("TITLE -> " + title);
+        this.setTitle(title);
+
+    }
+
+    public void init() {
+        this.peoplePanel.initPanel();
+        jButton_activity.doClick();
+        MQTTClient.getInstance().sendQueryToGetProjects();
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jButton2 = new JButton();
+        buttonGroup1 = new ButtonGroup();
+        jButton3 = new JButton();
+        jButton_activity = new JButton();
+        jButton5 = new JButton();
+        jPanel1 = new JPanel();
+        jToolBar1 = new JToolBar();
+        jToggleButton_Volontari = new JToggleButton();
+        jToggleButton_Volontari1 = new JToggleButton();
+        jToggleButton_Volontari2 = new JToggleButton();
+        jToggleButton_Volontari3 = new JToggleButton();
+        jSeparator1 = new JToolBar.Separator();
+        jScrollPane_container = new JScrollPane();
+        jLabel1 = new JLabel();
+        jLabel2 = new JLabel();
+        jLabel_status = new JLabel();
+
+        jButton2.setText("Turni");
+        jButton2.setFocusable(false);
+        jButton2.setHorizontalTextPosition(SwingConstants.CENTER);
+        jButton2.setVerticalTextPosition(SwingConstants.BOTTOM);
+        jButton2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton3.setIcon(new ImageIcon(getClass().getResource("/it/cnr/istc/sponsor/tt/gui/icons/settings32.png"))); // NOI18N
+        jButton3.setText("Profili");
+        jButton3.setFocusable(false);
+        jButton3.setHorizontalTextPosition(SwingConstants.CENTER);
+        jButton3.setVerticalTextPosition(SwingConstants.BOTTOM);
+        jButton3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton_activity.setIcon(new ImageIcon(getClass().getResource("/it/cnr/istc/sponsor/tt/gui/icons/monthly32.png"))); // NOI18N
+        jButton_activity.setText("Attività");
+        jButton_activity.setFocusable(false);
+        jButton_activity.setHorizontalTextPosition(SwingConstants.CENTER);
+        jButton_activity.setVerticalTextPosition(SwingConstants.BOTTOM);
+        jButton_activity.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jButton_activityActionPerformed(evt);
+            }
+        });
+
+        jButton5.setIcon(new ImageIcon(getClass().getResource("/it/cnr/istc/sponsor/tt/gui/icons/login32.png"))); // NOI18N
+        jButton5.setText("Calcolo Turnazione");
+        jButton5.setFocusable(false);
+        jButton5.setHorizontalTextPosition(SwingConstants.CENTER);
+        jButton5.setVerticalTextPosition(SwingConstants.BOTTOM);
+        jButton5.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new Color(255, 255, 255));
+
+        jToolBar1.setBorder(null);
+        jToolBar1.setFloatable(false);
+        jToolBar1.setRollover(true);
+        jToolBar1.setBorderPainted(false);
+
+        buttonGroup1.add(jToggleButton_Volontari);
+        jToggleButton_Volontari.setIcon(new ImageIcon(getClass().getResource("/it/cnr/istc/sponsor/tt/gui/icons/group.png"))); // NOI18N
+        jToggleButton_Volontari.setText("Volontari");
+        jToggleButton_Volontari.setFocusable(false);
+        jToggleButton_Volontari.setHorizontalTextPosition(SwingConstants.CENTER);
+        jToggleButton_Volontari.setVerticalTextPosition(SwingConstants.BOTTOM);
+        jToggleButton_Volontari.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jToggleButton_VolontariActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jToggleButton_Volontari);
+
+        buttonGroup1.add(jToggleButton_Volontari1);
+        jToggleButton_Volontari1.setIcon(new ImageIcon(getClass().getResource("/it/cnr/istc/sponsor/tt/gui/icons/profiles32.png"))); // NOI18N
+        jToggleButton_Volontari1.setText("Ruoli");
+        jToggleButton_Volontari1.setFocusable(false);
+        jToggleButton_Volontari1.setHorizontalTextPosition(SwingConstants.CENTER);
+        jToggleButton_Volontari1.setVerticalTextPosition(SwingConstants.BOTTOM);
+        jToggleButton_Volontari1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jToggleButton_Volontari1ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jToggleButton_Volontari1);
+
+        buttonGroup1.add(jToggleButton_Volontari2);
+        jToggleButton_Volontari2.setIcon(new ImageIcon(getClass().getResource("/it/cnr/istc/sponsor/tt/gui/icons/monthly32.png"))); // NOI18N
+        jToggleButton_Volontari2.setText("Attività");
+        jToggleButton_Volontari2.setFocusable(false);
+        jToggleButton_Volontari2.setHorizontalTextPosition(SwingConstants.CENTER);
+        jToggleButton_Volontari2.setVerticalTextPosition(SwingConstants.BOTTOM);
+        jToggleButton_Volontari2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jToggleButton_Volontari2ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jToggleButton_Volontari2);
+
+        buttonGroup1.add(jToggleButton_Volontari3);
+        jToggleButton_Volontari3.setIcon(new ImageIcon(getClass().getResource("/it/cnr/istc/sponsor/tt/gui/icons/login32.png"))); // NOI18N
+        jToggleButton_Volontari3.setText("Calcolo Turnazione");
+        jToggleButton_Volontari3.setFocusable(false);
+        jToggleButton_Volontari3.setHorizontalTextPosition(SwingConstants.CENTER);
+        jToggleButton_Volontari3.setVerticalTextPosition(SwingConstants.BOTTOM);
+        jToggleButton_Volontari3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
+                jToggleButton_Volontari3ActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(jToggleButton_Volontari3);
+        jToolBar1.add(jSeparator1);
+
+        jLabel1.setIcon(new ImageIcon(getClass().getResource("/it/cnr/istc/sponsor/tt/gui/icons/miniSponsorLogo.png"))); // NOI18N
+        jLabel1.setToolTipText("");
+
+        jLabel2.setFont(new Font("Tahoma", 1, 12)); // NOI18N
+        jLabel2.setHorizontalAlignment(SwingConstants.CENTER);
+        jLabel2.setText("Status Server:");
+
+        jLabel_status.setHorizontalAlignment(SwingConstants.CENTER);
+        jLabel_status.setText("OFFLINE");
+
+        GroupLayout jPanel1Layout = new GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane_container)
+                .addContainerGap())
+            .addGroup(GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addComponent(jToolBar1, GroupLayout.DEFAULT_SIZE, 1044, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel_status, GroupLayout.PREFERRED_SIZE, 135, GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jLabel2, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE)))
+                .addGap(5, 5, 5)
+                .addComponent(jLabel1))
+        );
+        jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jToolBar1, GroupLayout.PREFERRED_SIZE, 53, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel_status, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane_container, GroupLayout.DEFAULT_SIZE, 695, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        GroupLayout layout = new GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton3ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        this.jScrollPane_container.setViewportView(profilePanel);
+        if (profilePanel instanceof SubMainPanel) {
+            JComponent[] buttons = ((SubMainPanel) profilePanel).getToolbarButtons();
+            if (reservedButtons != null) {
+                for (JComponent reservedButton : reservedButtons) {
+                    this.jToolBar1.remove(reservedButton);
+                }
+            }
+            if (buttons != null) {
+                reservedButtons = new JButton[buttons.length];
+                reservedButtons = buttons;
+                for (JComponent button : buttons) {
+                    this.jToolBar1.add(button);
+                }
+            }
+            this.jToolBar1.invalidate();
+            this.repaint();
+        }
+
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.jScrollPane_container.setViewportView(timePanel);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton_activityActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton_activityActionPerformed
+//       this.jScrollPane_container.setViewportView(new ActivityCalendarPlacerPanel());
+        this.jScrollPane_container.setViewportView(oat);
+        if (oat instanceof SubMainPanel) {
+            JComponent[] buttons = ((SubMainPanel) oat).getToolbarButtons();
+            if (reservedButtons != null) {
+                for (JComponent reservedButton : reservedButtons) {
+                    this.jToolBar1.remove(reservedButton);
+                }
+            }
+            if (buttons != null) {
+                reservedButtons = new JButton[buttons.length];
+                reservedButtons = buttons;
+                for (JComponent button : buttons) {
+                    this.jToolBar1.add(button);
+                }
+
+            }
+            this.jToolBar1.invalidate();
+            this.repaint();
+        }
+    }//GEN-LAST:event_jButton_activityActionPerformed
+
+    private void jButton5ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        this.jScrollPane_container.setViewportView(solutionPanel);
+        if (solutionPanel instanceof SubMainPanel) {
+            JComponent[] buttons = ((SubMainPanel) solutionPanel).getToolbarButtons();
+            if (reservedButtons != null) {
+                for (JComponent reservedButton : reservedButtons) {
+                    this.jToolBar1.remove(reservedButton);
+                }
+            }
+            if (buttons != null) {
+                reservedButtons = new JButton[buttons.length];
+                reservedButtons = buttons;
+                for (JComponent button : buttons) {
+                    this.jToolBar1.add(button);
+                }
+            }
+            this.jToolBar1.invalidate();
+            this.repaint();
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jToggleButton_VolontariActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jToggleButton_VolontariActionPerformed
+        this.jScrollPane_container.setViewportView(peoplePanel);
+        if (peoplePanel instanceof SubMainPanel) {
+            JComponent[] buttons = ((SubMainPanel) peoplePanel).getToolbarButtons();
+            if (reservedButtons != null) {
+                for (JComponent reservedButton : reservedButtons) {
+                    this.jToolBar1.remove(reservedButton);
+                }
+            }
+            if (buttons != null) {
+                reservedButtons = new JButton[buttons.length];
+                reservedButtons = buttons;
+                for (JComponent button : buttons) {
+                    this.jToolBar1.add(button);
+                }
+            }
+            this.jToolBar1.invalidate();
+            this.repaint();
+        }
+    }//GEN-LAST:event_jToggleButton_VolontariActionPerformed
+
+    private void jToggleButton_Volontari1ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jToggleButton_Volontari1ActionPerformed
+        this.jScrollPane_container.setViewportView(profilePanel);
+        if (profilePanel instanceof SubMainPanel) {
+            JComponent[] buttons = ((SubMainPanel) profilePanel).getToolbarButtons();
+            if (reservedButtons != null) {
+                for (JComponent reservedButton : reservedButtons) {
+                    this.jToolBar1.remove(reservedButton);
+                }
+            }
+            if (buttons != null) {
+                reservedButtons = new JButton[buttons.length];
+                reservedButtons = buttons;
+                for (JComponent button : buttons) {
+                    this.jToolBar1.add(button);
+                }
+            }
+            this.jToolBar1.invalidate();
+            this.repaint();
+        }
+    }//GEN-LAST:event_jToggleButton_Volontari1ActionPerformed
+
+    private void jToggleButton_Volontari2ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jToggleButton_Volontari2ActionPerformed
+        this.jScrollPane_container.setViewportView(oat);
+        if (oat instanceof SubMainPanel) {
+            JComponent[] buttons = ((SubMainPanel) oat).getToolbarButtons();
+            if (reservedButtons != null) {
+                for (JComponent reservedButton : reservedButtons) {
+                    this.jToolBar1.remove(reservedButton);
+                }
+            }
+            if (buttons != null) {
+                reservedButtons = new JButton[buttons.length];
+                reservedButtons = buttons;
+                for (JComponent button : buttons) {
+                    this.jToolBar1.add(button);
+                }
+
+            }
+            this.jToolBar1.invalidate();
+            this.repaint();
+        }
+    }//GEN-LAST:event_jToggleButton_Volontari2ActionPerformed
+
+    private void jToggleButton_Volontari3ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jToggleButton_Volontari3ActionPerformed
+        this.jScrollPane_container.setViewportView(solutionPanel);
+        if (solutionPanel instanceof SubMainPanel) {
+            JComponent[] buttons = ((SubMainPanel) solutionPanel).getToolbarButtons();
+            if (reservedButtons != null) {
+                for (JComponent reservedButton : reservedButtons) {
+                    this.jToolBar1.remove(reservedButton);
+                }
+            }
+            if (buttons != null) {
+                reservedButtons = new JButton[buttons.length];
+                reservedButtons = buttons;
+                for (JComponent button : buttons) {
+                    this.jToolBar1.add(button);
+                }
+            }
+            this.jToolBar1.invalidate();
+            this.repaint();
+        }
+    }//GEN-LAST:event_jToggleButton_Volontari3ActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new MainFrame().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private ButtonGroup buttonGroup1;
+    private JButton jButton2;
+    private JButton jButton3;
+    private JButton jButton5;
+    private JButton jButton_activity;
+    private JLabel jLabel1;
+    private JLabel jLabel2;
+    private JLabel jLabel_status;
+    private JPanel jPanel1;
+    private JScrollPane jScrollPane_container;
+    private JToolBar.Separator jSeparator1;
+    private JToggleButton jToggleButton_Volontari;
+    private JToggleButton jToggleButton_Volontari1;
+    private JToggleButton jToggleButton_Volontari2;
+    private JToggleButton jToggleButton_Volontari3;
+    private JToolBar jToolBar1;
+    // End of variables declaration//GEN-END:variables
+}

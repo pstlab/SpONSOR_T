@@ -1,0 +1,412 @@
+{
+    "users": [
+        {
+            "name": "v00",
+            "profile": [
+                21,
+                14,
+                19,
+                0,
+                3,
+                2,
+                6,
+                5
+            ],
+            "availability": [
+                [
+                    9,
+                    21
+                ],
+                [
+                    33,
+                    45
+                ],
+                [
+                    57,
+                    69
+                ],
+                [
+                    81,
+                    93
+                ],
+                [
+                    105,
+                    117
+                ],
+                [
+                    129,
+                    141
+                ]
+            ]
+        },
+        {
+            "name": "v01",
+            "profile": [
+                15,
+                1,
+                6,
+                11,
+                5,
+                3,
+                24,
+                5
+            ],
+            "availability": [
+                [
+                    9,
+                    21
+                ],
+                [
+                    33,
+                    45
+                ],
+                [
+                    57,
+                    69
+                ],
+                [
+                    81,
+                    93
+                ],
+                [
+                    105,
+                    117
+                ],
+                [
+                    129,
+                    141
+                ]
+            ]
+        },
+        {
+            "name": "v02",
+            "profile": [
+                11,
+                13,
+                0,
+                8,
+                7,
+                9,
+                20,
+                2
+            ],
+            "availability": [
+                [
+                    9,
+                    21
+                ],
+                [
+                    33,
+                    45
+                ],
+                [
+                    57,
+                    69
+                ],
+                [
+                    81,
+                    93
+                ],
+                [
+                    105,
+                    117
+                ],
+                [
+                    129,
+                    141
+                ]
+            ]
+        }
+    ],
+    "activities": [
+        {
+            "name": "a00",
+            "skills": [
+                true,
+                false,
+                true,
+                false,
+                false,
+                true,
+                false,
+                false
+            ],
+            "span": [
+                9,
+                13
+            ]
+        },
+        {
+            "name": "a01",
+            "skills": [
+                true,
+                true,
+                true,
+                false,
+                false,
+                true,
+                false,
+                false
+            ],
+            "span": [
+                9,
+                13
+            ]
+        },
+        {
+            "name": "a03",
+            "skills": [
+                true,
+                true,
+                true,
+                false,
+                false,
+                true,
+                false,
+                false
+            ],
+            "span": [
+                13,
+                16
+            ]
+        },
+        {
+            "name": "a05",
+            "skills": [
+                true,
+                true,
+                true,
+                false,
+                false,
+                true,
+                false,
+                false
+            ],
+            "span": [
+                16,
+                19
+            ]
+        },
+        {
+            "name": "a09",
+            "skills": [
+                true,
+                false,
+                true,
+                false,
+                false,
+                true,
+                false,
+                true
+            ],
+            "span": [
+                33,
+                37
+            ]
+        },
+        {
+            "name": "a10",
+            "skills": [
+                true,
+                true,
+                true,
+                false,
+                false,
+                true,
+                false,
+                false
+            ],
+            "span": [
+                33,
+                37
+            ]
+        },
+        {
+            "name": "a11",
+            "skills": [
+                true,
+                false,
+                true,
+                true,
+                false,
+                true,
+                false,
+                false
+            ],
+            "span": [
+                33,
+                37
+            ]
+        },
+        {
+            "name": "a12",
+            "skills": [
+                true,
+                true,
+                true,
+                false,
+                false,
+                true,
+                false,
+                false
+            ],
+            "span": [
+                37,
+                40
+            ]
+        },
+        {
+            "name": "a13",
+            "skills": [
+                true,
+                false,
+                true,
+                true,
+                false,
+                true,
+                false,
+                false
+            ],
+            "span": [
+                40,
+                43
+            ]
+        },
+        {
+            "name": "a14",
+            "skills": [
+                true,
+                false,
+                true,
+                false,
+                false,
+                true,
+                false,
+                false
+            ],
+            "span": [
+                40,
+                43
+            ]
+        },
+        {
+            "name": "a16",
+            "skills": [
+                true,
+                false,
+                true,
+                true,
+                false,
+                true,
+                false,
+                false
+            ],
+            "span": [
+                43,
+                45
+            ]
+        },
+        {
+            "name": "a17",
+            "skills": [
+                true,
+                false,
+                true,
+                false,
+                false,
+                true,
+                false,
+                true
+            ],
+            "span": [
+                57,
+                61
+            ]
+        },
+        {
+            "name": "a18",
+            "skills": [
+                true,
+                true,
+                true,
+                false,
+                false,
+                true,
+                false,
+                false
+            ],
+            "span": [
+                57,
+                61
+            ]
+        },
+        {
+            "name": "a21",
+            "skills": [
+                true,
+                true,
+                true,
+                false,
+                false,
+                true,
+                false,
+                false
+            ],
+            "span": [
+                64,
+                67
+            ]
+        },
+        {
+            "name": "a25",
+            "skills": [
+                true,
+                false,
+                true,
+                false,
+                false,
+                true,
+                false,
+                false
+            ],
+            "span": [
+                81,
+                85
+            ]
+        },
+        {
+            "name": "a27",
+            "skills": [
+                true,
+                false,
+                true,
+                true,
+                false,
+                true,
+                false,
+                false
+            ],
+            "span": [
+                85,
+                88
+            ]
+        },
+        {
+            "name": "a33",
+            "skills": [
+                true,
+                false,
+                true,
+                false,
+                false,
+                true,
+                false,
+                false
+            ],
+            "span": [
+                105,
+                109
+            ]
+        }
+    ]
+}
