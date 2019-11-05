@@ -1,11 +1,11 @@
-var user;
-var mqtt_client;
+let user;
+let mqtt_client;
 
 $(window).on("load", function () {
-    var email = localStorage.getItem("email");
-    var password = localStorage.getItem("password");
+    let email = localStorage.getItem("email");
+    let password = localStorage.getItem("password");
     if (email && password) {
-        var form = new FormData();
+        let form = new FormData();
         form.append("email", email);
         form.append("password", password);
         fetch("http://localhost:7000/login", {
@@ -30,9 +30,9 @@ $(window).on("load", function () {
 });
 
 function login() {
-    var email = $("#login-email").val();
-    var password = $("#login-password").val();
-    var form = new FormData();
+    let email = $("#login-email").val();
+    let password = $("#login-password").val();
+    let form = new FormData();
     form.append("email", email);
     form.append("password", password);
     fetch("http://localhost:7000/login", {
@@ -66,9 +66,9 @@ function logout() {
 }
 
 function signin() {
-    var email = $("#signin-email").val();
-    var password = $("#signin-password").val();
-    var form = new FormData();
+    let email = $("#signin-email").val();
+    let password = $("#signin-password").val();
+    let form = new FormData();
     form.append("email", email);
     form.append("password", password);
     fetch("http://localhost:7000/users", {
@@ -105,7 +105,7 @@ function setUser(usr) {
             $("#save-profile").click(function () {
                 user.firstName = $("#first-name").val();
                 user.lastName = $("#last-name").val();
-                var url = "http://localhost:7000/users/" + user.id;
+                let url = "http://localhost:7000/users/" + user.id;
                 fetch(url, {
                     method: 'patch',
                     body: JSON.stringify(user)
@@ -127,7 +127,7 @@ function setUser(usr) {
     });
 
     // Create a client instance
-    mqtt_client = new Paho.MQTT.Client("localhost", 8080, "user" + user.id);
+    mqtt_client = new Paho.MQTT.Client("localhost", 8080, "user-" + user.id);
 
     // set callback handlers
     // called when the client loses its connection
@@ -148,9 +148,9 @@ function setUser(usr) {
             // Once a connection has been made, make a subscription and send a message.
             console.log("onConnect");
             user.online = true;
-            mqtt_client.subscribe("World", { qos: 2 });
-            message = new Paho.MQTT.Message("Hello");
-            message.destinationName = "World";
+            mqtt_client.subscribe("SpONSOR/user-" + user.id + "/#", { qos: 2 });
+            let message = new Paho.MQTT.Message("Hello");
+            message.destinationName = "SpONSOR/user-" + user.id;
             mqtt_client.send(message);
         }
     });
