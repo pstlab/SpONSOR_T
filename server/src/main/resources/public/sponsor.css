@@ -39,6 +39,16 @@ hr {
   border-top-left-radius: 1;
   border-top-right-radius: 1;
 }
+.form-signin input[type="text"] {
+  margin-bottom: 1px;
+  border-bottom-right-radius: 1;
+  border-bottom-left-radius: 1;
+}
+.form-signin button {
+  margin-top: 10px;
+  border-bottom-right-radius: 1;
+  border-bottom-left-radius: 1;
+}
 .container-fluid {
   height: 100%;
   padding-top: 10px;
@@ -50,43 +60,4 @@ hr {
 }
 .body-panel {
   height: 100%;
-}
-.first-row {
-  height: 69%;
-  overflow: hidden;
-}
-.last-row {
-  height: 29%;
-  overflow: hidden;
-}
-.col {
-  height: 100%;
-}
-.stimuli-list {
-  height: 95%;
-  max-height: 100%;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
-.f-lessons-list {
-  height: 80%;
-  max-height: 100%;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
-.t-lessons-list {
-  height: 95%;
-  max-height: 100%;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
-.students-list {
-  height: 80%;
-  max-height: 100%;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
-.list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
-  background-color: #343a40;
-  border-color: #343a40;
 }

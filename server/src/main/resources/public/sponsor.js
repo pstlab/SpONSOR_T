@@ -45,9 +45,6 @@ function login() {
             localStorage.setItem("email", email);
             localStorage.setItem("password", password);
             response.json().then(data => { setUser(data); });
-        } else {
-            localStorage.removeItem("email");
-            localStorage.removeItem("password");
         }
     }).catch(error => {
         console.log(error.json());
@@ -58,19 +55,19 @@ function logout() {
     mqtt_client.disconnect();
     localStorage.removeItem("email");
     localStorage.removeItem("password");
-    $("#navbar-content").remove();
-    $("#body-content").remove();
-    $.get("login_form.html", function (data) { $("#nav-bar").append(data); });
-    $.get("signin_form.html", function (data) { $("#body").append(data); });
-    user = undefined;
+    location.reload(false);
 }
 
 function signin() {
     let email = $("#signin-email").val();
     let password = $("#signin-password").val();
+    let first_name = $("#signin-first-name").val();
+    let last_name = $("#signin-last-name").val();
     let form = new FormData();
     form.append("email", email);
     form.append("password", password);
+    form.append("first_name", first_name);
+    form.append("last_name", last_name);
     fetch("http://localhost:7000/users", {
         method: 'post',
         body: form
@@ -81,9 +78,21 @@ function signin() {
             localStorage.setItem("email", email);
             localStorage.setItem("password", password);
             location.reload(false);
-        } else {
+        }
+    }).catch(error => {
+        console.log(error.json());
+    });
+}
+
+function deleteUser() {
+    fetch("http://localhost:7000/users/" + user.id, {
+        method: 'delete'
+    }).then(response => {
+        if (response.ok) {
+            mqtt_client.disconnect();
             localStorage.removeItem("email");
             localStorage.removeItem("password");
+            location.reload(false);
         }
     }).catch(error => {
         console.log(error.json());
@@ -105,8 +114,7 @@ function setUser(usr) {
             $("#save-profile").click(function () {
                 user.firstName = $("#first-name").val();
                 user.lastName = $("#last-name").val();
-                let url = "http://localhost:7000/users/" + user.id;
-                fetch(url, {
+                fetch("http://localhost:7000/users/" + user.id, {
                     method: 'patch',
                     body: JSON.stringify(user)
                 }).then(response => {
@@ -121,13 +129,19 @@ function setUser(usr) {
                 });
             });
         })
-        $.get("body.html", function (data) {
-            $("#body").append(data);
+
+        $.get("body.html", function (body_data) {
+            $("#body").append(body_data);
+            if (user.affiliations.length == 0) {
+                $.get("no_organizations.html", function (no_org_data) {
+                    $("#body-content").append(no_org_data);
+                });
+            }
         });
     });
 
     // Create a client instance
-    mqtt_client = new Paho.MQTT.Client("localhost", 8080, "user-" + user.id);
+    mqtt_client = new Paho.MQTT.Client("localhost", 8080, "" + user.id);
 
     // set callback handlers
     // called when the client loses its connection
@@ -148,9 +162,9 @@ function setUser(usr) {
             // Once a connection has been made, make a subscription and send a message.
             console.log("onConnect");
             user.online = true;
-            mqtt_client.subscribe("SpONSOR/user-" + user.id + "/#", { qos: 2 });
+            mqtt_client.subscribe("SpONSOR/" + user.id + "/#", { qos: 2 });
             let message = new Paho.MQTT.Message("Hello");
-            message.destinationName = "SpONSOR/user-" + user.id;
+            message.destinationName = "SpONSOR/" + user.id;
             mqtt_client.send(message);
         }
     });

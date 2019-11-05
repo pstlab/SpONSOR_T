@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -16,6 +17,7 @@ import io.javalin.http.ConflictResponse;
 import io.javalin.http.Context;
 import io.javalin.http.ForbiddenResponse;
 import io.javalin.http.NotFoundResponse;
+import it.cnr.istc.pst.sponsor.api.Affiliation;
 import it.cnr.istc.pst.sponsor.api.User;
 import it.cnr.istc.pst.sponsor.server.db.UserEntity;
 
@@ -28,7 +30,7 @@ public class UserController {
     /**
      * For each user id, a boolean indicating whether the user is online.
      */
-    static final Map<Long, Boolean> ONLINE = new HashMap<>();
+    static final Map<Long, Boolean> ON_LINE = new HashMap<>();
 
     static public void login(Context ctx) {
         String email = ctx.formParam("email");
@@ -44,7 +46,12 @@ public class UserController {
             UserEntity user_entity = query.getSingleResult();
 
             User user = new User(user_entity.getId(), user_entity.getEmail(), user_entity.getFirstName(),
-                    user_entity.getLastName(), ONLINE.getOrDefault(user_entity.getId(), false));
+                    user_entity.getLastName(),
+                    user_entity.getAffiliations().stream()
+                            .map(aff -> new Affiliation(aff.getUser().getId(), aff.getOrganization().getId(),
+                                    aff.getAffiliationDate()))
+                            .collect(Collectors.toList()),
+                    ON_LINE.getOrDefault(user_entity.getId(), false));
             ctx.json(user);
         } catch (NoResultException e) {
             throw new ForbiddenResponse();
@@ -60,7 +67,7 @@ public class UserController {
         List<User> users = new ArrayList<>(user_entities.size());
         for (UserEntity user_entity : user_entities)
             users.add(new User(user_entity.getId(), user_entity.getEmail(), user_entity.getFirstName(),
-                    user_entity.getLastName(), ONLINE.getOrDefault(user_entity.getId(), false)));
+                    user_entity.getLastName(), null, ON_LINE.getOrDefault(user_entity.getId(), false)));
 
         ctx.json(users);
     }
@@ -68,12 +75,16 @@ public class UserController {
     static public void createUser(Context ctx) {
         String email = ctx.formParam("email");
         String password = ctx.formParam("password");
+        String first_name = ctx.formParam("first_name");
+        String last_name = ctx.formParam("last_name");
         LOG.info("creating new user {}..", email);
         EntityManager em = App.EMF.createEntityManager();
 
         UserEntity user_entity = new UserEntity();
         user_entity.setEmail(email);
         user_entity.setPassword(password);
+        user_entity.setFirstName(first_name);
+        user_entity.setLastName(last_name);
 
         try {
             em.getTransaction().begin();
@@ -93,7 +104,12 @@ public class UserController {
             throw new NotFoundResponse();
 
         User user = new User(user_entity.getId(), user_entity.getEmail(), user_entity.getFirstName(),
-                user_entity.getLastName(), ONLINE.getOrDefault(user_entity.getId(), false));
+                user_entity.getLastName(),
+                user_entity.getAffiliations().stream()
+                        .map(aff -> new Affiliation(aff.getUser().getId(), aff.getOrganization().getId(),
+                                aff.getAffiliationDate()))
+                        .collect(Collectors.toList()),
+                ON_LINE.getOrDefault(user_entity.getId(), false));
         ctx.json(user);
     }
 

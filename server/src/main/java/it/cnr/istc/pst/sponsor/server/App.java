@@ -30,7 +30,8 @@ import io.moquette.interception.messages.InterceptConnectionLostMessage;
 import io.moquette.interception.messages.InterceptDisconnectMessage;
 import io.moquette.interception.messages.InterceptPublishMessage;
 import io.netty.buffer.ByteBufUtil;
-import it.cnr.istc.pst.sponsor.server.db.UserEntity;;
+import it.cnr.istc.pst.sponsor.server.db.OrganizationEntity;
+import it.cnr.istc.pst.sponsor.server.db.UserEntity;
 
 /**
  * SpONSOR Server
@@ -39,7 +40,6 @@ public class App {
 
     static final Logger LOG = LoggerFactory.getLogger(App.class);
     static final EntityManagerFactory EMF = Persistence.createEntityManagerFactory("SpONSOR_PU");
-    private static final Set<String> ON_LINE = new HashSet<>();
 
     public static void main(String[] args) throws IOException {
         // we create the app..
@@ -58,7 +58,14 @@ public class App {
 
                 LOG.info("Loading {} users..", users.size());
                 for (UserEntity ue : users)
-                    UserController.ONLINE.put(ue.getId(), false);
+                    UserController.ON_LINE.put(ue.getId(), false);
+
+                List<OrganizationEntity> organizations = em
+                        .createQuery("SELECT oe FROM OrganizationEntity oe", OrganizationEntity.class).getResultList();
+
+                LOG.info("Loading {} organizations..", organizations.size());
+                for (OrganizationEntity oe : organizations)
+                    UserController.ON_LINE.put(oe.getId(), false);
             });
         });
 
@@ -92,17 +99,17 @@ public class App {
 
                     @Override
                     public void onDisconnect(InterceptDisconnectMessage idm) {
-                        ON_LINE.remove(idm.getClientID());
+                        UserController.ON_LINE.put(Long.parseLong(idm.getClientID()), false);
                     }
 
                     @Override
                     public void onConnectionLost(InterceptConnectionLostMessage iclm) {
-                        ON_LINE.remove(iclm.getClientID());
+                        UserController.ON_LINE.put(Long.parseLong(iclm.getClientID()), false);
                     }
 
                     @Override
                     public void onConnect(InterceptConnectMessage icm) {
-                        ON_LINE.add(icm.getClientID());
+                        UserController.ON_LINE.put(Long.parseLong(icm.getClientID()), true);
                     }
 
                     @Override

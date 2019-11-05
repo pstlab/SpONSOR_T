@@ -2,6 +2,8 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
     <persistence-unit name="SpONSOR_PU" transaction-type="RESOURCE_LOCAL">
         <class>it.cnr.istc.pst.sponsor.server.db.UserEntity</class>
+        <class>it.cnr.istc.pst.sponsor.server.db.OrganizationEntity</class>
+        <class>it.cnr.istc.pst.sponsor.server.db.AffiliationEntity</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.apache.derby.jdbc.EmbeddedDriver" />
             <property name="javax.persistence.jdbc.url" value="jdbc:derby:data;create=true" />
